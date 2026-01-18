@@ -1,1 +1,49 @@
- 
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel do Professor</title>
+  <link rel="stylesheet" href="../src/style/professor.css" />
+</head>
+<body>
+
+<header>
+  <h1>Painel do Professor</h1>
+  <button id="btnSair">Sair</button>
+</header>
+
+<main>
+  <section class="form-presenca">
+    <h2>Registrar Presença</h2>
+
+    <form id="formPresenca">
+      <input type="text" id="aluno" placeholder="Nome do aluno" required />
+      <input type="date" id="data" required />
+      <button type="submit">Salvar Presença</button>
+    </form>
+  </section>
+
+  <section class="lista-presencas">
+    <h2>Presenças Registradas</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Aluno</th>
+          <th>Data</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaPresencas"></tbody>
+    </table>
+  </section>
+
+  <section class="resumo">
+    <h2>Total de Presenças</h2>
+    <ul id="totalPresencas"></ul>
+  </section>
+</main>
+
+<script type="module" src="/src/js/professor.js"></script>
+</body>
+</html>
