@@ -31,6 +31,6 @@ document.getElementById("logoutBtn")
     localStorage.removeItem("access_token");
     localStorage.removeItem("role");
 
-    window.location.href = "../index.html";
+    window.location.href = "/";
 });
 
