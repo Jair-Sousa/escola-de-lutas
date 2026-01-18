@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Criar conta</title>
+  <link rel="stylesheet" href="./style/register.css" />
+</head>
+<body>
+
+  <div class="card">
+    <h2>Criar conta</h2>
+
+    <form id="registerForm">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Nome completo"
+        required
+      />
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        required
+      />
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Senha"
+        required
+      />
+
+      <div class="roles">
+        <label>
+          <input type="radio" name="role" value="aluno" required />
+          Aluno
+        </label>
+
+        <label>
+          <input type="radio" name="role" value="professor" required />
+          Professor
+        </label>
+      </div>
+
+      <button type="submit">Cadastrar</button>
+
+      <p id="message"></p>
+
+    </form>
+
+    <p>
+      Já tem conta?
+      <a href="login.html">Fazer login</a>
+    </p>
+  </div>
+
+  <script type="module" src="./js/register.js"></script>
+</body>
+</html>

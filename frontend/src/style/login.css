@@ -1,0 +1,115 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Página */
+body {
+  min-height: 100vh;
+  background: #0e0e0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container */
+.login-container {
+  background: #161616;
+  padding: 40px 30px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Logo */
+.login-container img {
+  width: 110px;
+  margin-bottom: 20px;
+}
+
+/* Título */
+.login-container h2 {
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+/* Form */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs */
+.login-container input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Botão */
+.login-container button {
+  padding: 12px;
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-container button:hover {
+  background: #a81f1f;
+}
+
+.toggle {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.toggle a {
+  color: #fbc02d;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+
+.toggle a:hover {
+  color: #ffd54f;
+  text-decoration: underline;
+}
+
+.profile {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.profile label {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+/* Feedback */
+#feedback {
+  margin-top: 15px;
+  color: #fbc02d;
+  font-size: 14px;
+}
