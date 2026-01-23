@@ -7,43 +7,40 @@
 </head>
 <body>
 
-<header>
-  <h1>Painel do Professor</h1>
-  <button id="btnSair">Sair</button>
-</header>
+  <header>
+    <h1>Painel do Professor</h1>
+    <button id="btnSair">Sair</button>
+  </header>
 
-<main>
-  <section class="form-presenca">
-    <h2>Registrar Presença</h2>
+  <main>
 
-    <form id="formPresenca">
-      <input type="text" id="aluno" placeholder="Nome do aluno" required />
-      <input type="date" id="data" required />
-      <button type="submit">Salvar Presença</button>
-    </form>
-  </section>
+    <!-- REGISTRO DE PRESENÇA -->
+    <section class="form-presenca">
+      <h2>Registrar Presença</h2>
 
-  <section class="lista-presencas">
-    <h2>Presenças Registradas</h2>
+      <div class="filtro-data">
+        <label for="dataPresenca">Data da aula:</label>
+        <input type="date" id="dataPresenca" />
+        <button id="btnCarregarAlunos" type="button">
+          Carregar alunos
+        </button>
+      </div>
+    </section>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Aluno</th>
-          <th>Data</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="tabelaPresencas"></tbody>
-    </table>
-  </section>
+    <!-- LISTA DE ALUNOS -->
+    <section class="lista-alunos">
+      <h2>Alunos</h2>
 
-  <section class="resumo">
-    <h2>Total de Presenças</h2>
-    <ul id="totalPresencas"></ul>
-  </section>
-</main>
+      <form id="formListaPresenca">
+        <ul id="listaAlunos"></ul>
 
+        <button type="submit" class="btn-confirmar">
+          Confirmar presença
+        </button>
+      </form>
+    </section>
+
+  </main>
 <script type="module" src="/src/js/professor.js"></script>
 </body>
 </html>

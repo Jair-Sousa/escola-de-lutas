@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Criar conta</title>
-  <link rel="stylesheet" href="./src/style/register.css" />
+  <link rel="stylesheet" href="./src/style/signup.css" />
 </head>
 <body>
 
   <div class="card">
     <h2>Criar conta</h2>
 
-    <form id="registerForm">
+    <form id="signupForm">
 
       <input
         type="text"
@@ -33,18 +33,6 @@
         required
       />
 
-      <div class="roles">
-        <label>
-          <input type="radio" name="role" value="aluno" required />
-          Aluno
-        </label>
-
-        <label>
-          <input type="radio" name="role" value="professor" required />
-          Professor
-        </label>
-      </div>
-
       <button type="submit">Cadastrar</button>
 
       <p id="message"></p>
@@ -57,6 +45,6 @@
     </p>
   </div>
 
-  <script type="module" src="./src/js/register.js"></script>
+  <script type="module" src="./src/js/signup.js"></script>
 </body>
 </html>
