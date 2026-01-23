@@ -11,3 +11,7 @@ export const supabase = createClient(
 console.log("SUPABASE URL:", import.meta.env.VITE_SUPABASE_URL);
 
 console.log("SUPABASE CLIENT INSTANCE:", crypto.randomUUID());
+console.log(
+  'SUPABASE CLIENT ID:',
+  crypto.randomUUID()
+);
