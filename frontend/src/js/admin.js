@@ -1,3 +1,4 @@
+import '/src/js/authGuard.js';
 import { requireRole } from "./authGuard.js";
 import { supabase } from "./supabaseClient.js";
 
