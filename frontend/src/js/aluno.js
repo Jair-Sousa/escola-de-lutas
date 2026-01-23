@@ -1,44 +1,13 @@
-// ==========================
-// PROTEÇÃO DA ROTA
-// ==========================
-console.log("aluno.js carregado");
+import { requireRole } from "./authGuard.js";
+import { supabase } from "./supabaseClient.js";
 
-const role = localStorage.getItem("role");
-const token = localStorage.getItem("access_token");
+const ok = await requireRole(["aluno"]);
+if (!ok) return;
 
-if (!token || role !== "aluno") {
-  window.location.href = "/index.html";
-}
+console.log("ALUNO AUTORIZADO");
 
-// ==========================
-// LOGOUT
-// ==========================
 const logoutBtn = document.getElementById("logoutBtn");
-
-logoutBtn.addEventListener("click", () => {
-  localStorage.clear();
-  window.location.href = "/index.html";
-});
-
-// ==========================
-// PRESENÇA (MOCK POR ENQUANTO)
-// ==========================
-const presencas = [
-  { data: "10/01/2026", treino: "Jiu-Jitsu", status: "Presente" },
-  { data: "12/01/2026", treino: "Jiu-Jitsu", status: "Ausente" },
-  { data: "15/01/2026", treino: "Jiu-Jitsu", status: "Presente" },
-];
-
-const tbody = document.querySelector("#presencaTable tbody");
-
-presencas.forEach(p => {
-  const tr = document.createElement("tr");
-
-  tr.innerHTML = `
-    <td>${p.data}</td>
-    <td>${p.treino}</td>
-    <td>${p.status}</td>
-  `;
-
-  tbody.appendChild(tr);
+logoutBtn.addEventListener("click", async () => {
+  await supabase.auth.signOut();
+  window.location.replace("/login.html");
 });
