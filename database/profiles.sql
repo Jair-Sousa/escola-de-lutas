@@ -1,35 +1,38 @@
 -- =========================
--- RLS: profiles
+-- TABELA: profiles
 -- =========================
+create table if not exists profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  name text not null,
+  role text not null check (role in ('aluno', 'professor', 'admin')),
+  created_at timestamp with time zone default now()
+);
 
 alter table profiles enable row level security;
 
--- Qualquer usuário autenticado pode ler profiles
-create policy "profiles_select_authenticated"
-on profiles
-for select
-using (
-  auth.uid() is not null
-);
-
 -- =========================
--- RLS: presencas
+-- FUNÇÃO: cria profile no signup
 -- =========================
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into profiles (id, name, role)
+  values (
+    new.id,
+    coalesce(new.raw_user_meta_data->>'name', 'Aluno'),
+    'aluno'
+  );
+  return new;
+end;
+$$;
 
-alter table presencas enable row level security;
+drop trigger if exists on_auth_user_created on auth.users;
 
--- Professor e admin podem gerenciar presenças
-create policy "presencas_manage_professor_admin"
-on presencas
-for all
-using (
-  auth.jwt() ->> 'role' in ('professor', 'admin')
-);
-
--- Aluno pode ver apenas suas próprias presenças
-create policy "presencas_select_aluno"
-on presencas
-for select
-using (
-  aluno_id = auth.uid()
-);
+create trigger on_auth_user_created
+after insert on auth.users
+for each row
+execute function public.handle_new_user();
