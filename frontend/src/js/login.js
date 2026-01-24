@@ -24,7 +24,7 @@ if (form) {
     feedback.textContent = "Entrando...";
 
     // 🔐 LOGIN
-    const { error } = await supabase.auth.signInWithPassword({
+    const {data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
@@ -35,7 +35,39 @@ if (form) {
       return;
     }
 
-    // ✅ LOGIN OK → REDIRECIONA
-    window.location.href = "/pages/aluno.html";
+    // ==========================
+    // BUSCA PROFILE (ROLE)
+    // ==========================
+    const userId = data.user.id;
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
+      .single();
+      console.log("ROLE VINDO DO BANCO:", profile.role);
+
+
+    if (profileError || !profile?.role) {
+      console.error("PROFILE ERROR:", profileError);
+      feedback.textContent = "Erro ao carregar perfil do usuário";
+      return;
+    }
+
+    // ==========================
+    // REDIRECIONAMENTO POR ROLE
+    // ==========================
+    switch (profile.role) {
+      case "admin":
+        window.location.replace("/pages/admin.html");
+        break;
+
+      case "professor":
+        window.location.replace("/pages/professor.html");
+        break;
+
+      default:
+        window.location.replace("/pages/aluno.html");
+    }
   });
 }
