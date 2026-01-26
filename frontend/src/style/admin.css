@@ -18,7 +18,7 @@ body {
   padding: 40px;
   border-radius: 8px;
   width: 100%;
-  max-width: 600px;
+  max-width: 900px; /* ERA 600px */
   text-align: center;
   color: #fff;
 }
@@ -30,6 +30,12 @@ body {
 .membro-container p {
   margin-bottom: 30px;
   color: #ccc;
+}
+
+.divisor {
+  height: 1px;
+  background: #2a2a2a;
+  margin: 40px 0;
 }
 
 .areas {
@@ -84,9 +90,294 @@ body {
   background: #444;
 }
 
+.voltar-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 20px 0;
+}
+
+.voltar-btn:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ===== TELAS (BLOCOS) ===== */
+
+#preCadastroSection,
+#listaPessoasSection {
+  background: #1b1b1b;
+  padding: 25px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+/* ===== FORMULÁRIO ===== */
+
+#preCadastroSection h2,
+#listaPessoasSection h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#formPessoa {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+/* Inputs básicos */
+#formPessoa input,
+#formPessoa select {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+/* Campo grande */
+#nome {
+  grid-column: span 2;
+}
+
+/* Botão */
+#formPessoa button {
+  grid-column: span 5;
+  padding: 12px;
+  background: #c62828;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#formPessoa button:hover {
+  background: #a81f1f;
+}
+
+/* ===== MODALIDADES ===== */
+
+#formPessoa fieldset {
+  grid-column: span 5;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+#formPessoa legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#formPessoa fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* ===== TABELA ===== */
+
+.tabela-pessoas {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.tabela-pessoas thead {
+  background: #2a2a2a;
+}
+
+.tabela-pessoas th,
+.tabela-pessoas td {
+  padding: 12px;
+  text-align: left;
+}
+
+.tabela-pessoas th {
+  color: #fff;
+}
+
+.tabela-pessoas td {
+  color: #ccc;
+  border-top: 1px solid #333;
+}
+
+/* ===== STATUS ===== */
+
+.status-sem-conta {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.status-com-conta {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* ===== PRESENÇAS (ADMIN) ===== */
+
+.filtros-presencas {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filtros-presencas input,
+.filtros-presencas select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.filtros-presencas button {
+  padding: 8px 16px;
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filtros-presencas button:hover {
+  background: #555;
+}
+
+
+/* ===== VOLTAR ===== */
+
+.voltar-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 20px 0;
+}
+
+.voltar-btn:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 768px) {
+  #formPessoa {
+    grid-template-columns: 1fr;
+  }
+
+  #nome {
+    grid-column: span 1;
+  }
+
+  #formPessoa button {
+    grid-column: span 1;
+  }
+}
+
+
 /* Responsivo */
 @media (max-width: 600px) {
   .areas {
     flex-direction: column;
+  }
+}
+
+/* ===== TELA PESSOAS ===== */
+
+#listaPessoasSection {
+  margin-top: 40px;
+  text-align: left;
+}
+
+#listaPessoasSection h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Tabela */
+.tabela-pessoas {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1f1f1f;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.tabela-pessoas thead {
+  background: #2a2a2a;
+}
+
+.tabela-pessoas th,
+.tabela-pessoas td {
+  padding: 12px;
+  text-align: left;
+}
+
+.tabela-pessoas th {
+  color: #fff;
+  font-weight: bold;
+}
+
+.tabela-pessoas td {
+  color: #ccc;
+  border-top: 1px solid #333;
+}
+
+/* Status visual */
+.status-sem-conta {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.status-com-conta {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Modalidades */
+.modalidades {
+  font-size: 13px;
+  color: #bbb;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .tabela-pessoas thead {
+    display: none;
+  }
+
+  .tabela-pessoas,
+  .tabela-pessoas tbody,
+  .tabela-pessoas tr,
+  .tabela-pessoas td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabela-pessoas tr {
+    margin-bottom: 15px;
+    background: #1f1f1f;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .tabela-pessoas td {
+    border: none;
+    padding: 6px 0;
+  }
+
+  .tabela-pessoas td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    margin-bottom: 3px;
   }
 }
