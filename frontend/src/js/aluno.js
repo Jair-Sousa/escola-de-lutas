@@ -1,26 +1,37 @@
-import '/src/js/authGuard.js';
-import { requireRole } from '/src/js/authGuard.js';
-import { supabase } from '/src/js/supabaseClient.js';
+import { requireAuth } from "./authGuard.js";
+import { supabase } from "./supabaseClient.js";
 
-async function init() {
-  const ok = await requireRole(['aluno']);
+document.addEventListener("DOMContentLoaded", async () => {
+  // 🔐 1. Garante apenas que está logado
+  const user = await requireAuth();
+  if (!user) return;
 
-  if (!ok) {
-    window.location.replace('/login.html');
+  // 👤 2. Busca profile
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("pessoa_id")
+    .eq("id", user.id)
+    .single();
+
+  if (profileError || !profile?.pessoa_id) {
+    window.location.replace("/login.html");
     return;
   }
 
-  console.log('ALUNO AUTORIZADO');
+  // 🎯 3. Busca pessoa (regra de negócio)
+  const { data: pessoa } = await supabase
+    .from("pessoas")
+    .select("tipo")
+    .eq("id", profile.pessoa_id)
+    .single();
 
-  const logoutBtn = document.getElementById('logoutBtn');
-
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', async () => {
-      await supabase.auth.signOut();
-      // NÃO redireciona aqui
-      // authGuard.onAuthStateChange tratará SIGNED_OUT
-    });
+  if (pessoa?.tipo !== "aluno") {
+    // ❌ Não é aluno → não pode ficar aqui
+    window.location.replace("/login.html");
+    return;
   }
-}
 
-init();
+  // ✅ A partir daqui: código NORMAL da página do aluno
+  console.log("✅ Aluno autorizado");
+});
+
