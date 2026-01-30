@@ -7,7 +7,7 @@ signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
   const password = document.getElementById("password").value.trim();
 
   if (!name || !email || !password) {
@@ -17,19 +17,19 @@ signupForm.addEventListener("submit", async (e) => {
 
   try {
     // 🔐 Cria usuário no Supabase Auth
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          name,       // será usado pela trigger
-          role: "aluno"
+          name       // será usado pela trigger
         }
       }
     });
+    console.log("SIGNUP RESULT:", data, error);
 
-    if (error) {
-      showMessage(error.message, "red");
+    if (!data.user) {
+      showMessage("Conta criada! Verifique seu email.", "green");
       return;
     }
 

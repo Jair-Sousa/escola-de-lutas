@@ -1,8 +1,8 @@
-import { requireRole } from "./authGuard.js";
+import { requireAdmin } from "./authGuard.js";
 import { supabase } from "./supabaseClient.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await requireRole(["admin"]);
+  await requireAdmin();
 
   // ===== SEÇÕES =====
   const dashboard = document.getElementById("dashboardSection");
@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   logoutBtn.addEventListener("click", async () => {
     await supabase.auth.signOut();
-    window.location.href = "/login.html";
   });
 
   // ===== SUBMIT =====
@@ -84,25 +83,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const modalidades = [];
     document
-      .querySelectorAll('input[type="checkbox"]:checked')
-      .forEach((cb) => {
-        const faixa = document.querySelector(
-          `select[data-faixa="${cb.value}"]`
-        ).value;
+    .querySelectorAll('input[type="checkbox"]:checked')
+    .forEach((cb) => {
+      const faixa = document.querySelector(
+        `select[data-faixa="${cb.value}"]`
+      ).value;
 
-        modalidades.push({
-          pessoa_id: pessoa.id,
-          modalidade: cb.value,
-          faixa,
-        });
+      modalidades.push({
+        pessoa_id: pessoa.id,
+        modalidade: cb.value,
+        faixa,
       });
+    });
+
+    console.log("ANTES DO INSERT - MODALIDADES:", modalidades);
 
     if (modalidades.length > 0) {
-      await supabase.from("pessoas_modalidades").insert(modalidades);
+      const { error } = await supabase
+        .from("pessoas_modalidades")
+        .insert(modalidades);
+
+      if (error) {
+        console.error("ERRO AO INSERIR MODALIDADES:", error);
+        return; // 👈 não reseta se deu erro
+      }
+    } else {
+      console.warn("⚠️ Nenhuma modalidade selecionada");
     }
 
+    // 👇 só reseta se tudo deu certo
     form.reset();
     carregarPessoas();
+
   });
 });
 
@@ -149,7 +161,6 @@ async function carregarPresencas() {
     .select(`
       data,
       profiles (
-        name,
         role
       )
     `)

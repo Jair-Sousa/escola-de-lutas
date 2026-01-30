@@ -1,14 +1,14 @@
-import { requireRole } from "./authGuard.js";
+import { requireAuth } from "./authGuard.js";
 import { supabase } from "./supabaseClient.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await requireRole(["professor", "admin"]);
+  const user = await requireAuth();
+  if (!user) return;
 
   const btnSair = document.getElementById("btnSair");
   if (btnSair) {
     btnSair.addEventListener("click", async () => {
       await supabase.auth.signOut();
-      window.location.href = "/login.html";
     });
   }
 
@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     listaAlunos.innerHTML = "<li>Carregando alunos...</li>";
 
     const { data, error } = await supabase
-      .from("profiles")
-      .select("id, name")
-      .eq("role", "aluno")
-      .order("name");
+      .from("pessoas")
+      .select("id, nome_completo")
+      .eq("tipo", "aluno")
+      .order("nome_completo");
 
     if (error) {
       alert("Erro ao carregar alunos");
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       li.innerHTML = `
         <label>
           <input type="checkbox" value="${aluno.id}" />
-          ${aluno.name}
+          ${aluno.nome_completo}
         </label>
       `;
 
