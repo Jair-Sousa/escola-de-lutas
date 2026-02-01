@@ -123,8 +123,10 @@ async function carregarPessoas() {
   const { data, error } = await supabase
     .from("pessoas")
     .select(`
+      id,
       nome_completo,
       tipo,
+      profiles ( id ),
       pessoas_modalidades (modalidade, faixa, ativa)
     `)
     .order("nome_completo");
@@ -138,6 +140,8 @@ async function carregarPessoas() {
   tbody.innerHTML = "";
 
   data.forEach((pessoa) => {
+    const temConta = pessoa.profiles && pessoa.profiles.length > 0;
+    
     const modalidades = pessoa.pessoas_modalidades
       .filter((m) => m.ativa)
       .map((m) => `${m.modalidade} (${m.faixa})`)
@@ -148,7 +152,11 @@ async function carregarPessoas() {
       <td data-label="Nome">${pessoa.nome_completo}</td>
       <td data-label="Tipo">${pessoa.tipo}</td>
       <td data-label="Modalidades">${modalidades || "-"}</td>
-      <td data-label="Status" class="status-sem-conta">Sem conta</td>
+      <td data-label="Status"
+      class="${temConta ? "status-ok" : "status-sem-conta"}"
+      >
+      ${temConta ? "Com conta" : "Sem conta"}
+      </td>
     `;
     tbody.appendChild(tr);
   });
