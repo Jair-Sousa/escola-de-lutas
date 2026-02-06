@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área de Membros - Login</title>
-  <link rel="stylesheet" href="./style/login.css" />
+  <link rel="stylesheet" href="./src/style/login.css" />
 </head>
 <body>
 
@@ -20,25 +20,12 @@
     </form>
 
     <p class="toggle">Não tem conta?
-      <a href="register.html" id="toggle">Criar conta</a>
+      <a href="signup.html" id="toggle">Criar conta</a>
     </p>
-
-    <div id="profileGroup" class="profile hidden">
-      <label>
-        <input type="radio" name="role" value="ALUNO" checked />
-        Aluno
-      </label>
-
-      <label>
-        <input type="radio" name="role" value="PROFESSOR" />
-        Professor
-      </label>
-    </div>
-
 
     <p id="feedback"></p>
   </main>
 
-  <script type="module" src="./js/login.js"></script>
+  <script type="module" src="./src/js/login.js"></script>
 </body>
 </html>

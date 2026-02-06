@@ -22,14 +22,15 @@ const supabase = createClient(
  */
 app.post("/auth/register", async (req, res) => {
   const { email, password, role } = req.body;
+  const normalizedRole = role?.toUpperCase();
 
-  if (!email || !password || !role) {
+  if (!email || !password || !normalizedRole) {
     return res.status(400).json({
       error: "Email, senha e perfil são obrigatórios",
     });
   }
 
-  if (!["ALUNO", "PROFESSOR"].includes(role)) {
+  if (!["ALUNO", "PROFESSOR"].includes(normalizedRole)) {
     return res.status(400).json({
       error: "Perfil inválido",
     });
@@ -39,13 +40,13 @@ app.post("/auth/register", async (req, res) => {
     email,
     password,
     email_confirm: true,
-    user_metadata: { role },
+    user_metadata: {
+      role: normalizedRole,
+    },
   });
 
   if (error) {
-    return res.status(400).json({
-      error: error.message,
-    });
+    return res.status(400).json({ error: error.message });
   }
 
   return res.status(201).json({
@@ -53,6 +54,7 @@ app.post("/auth/register", async (req, res) => {
     userId: data.user.id,
   });
 });
+
 
 /**
  * 🔐 LOGIN

@@ -1,85 +1,140 @@
+// =======================================================
+// LOGIN.JS
+// -------------------------------------------------------
+// Responsabilidades:
+// - Autenticar usuário via Supabase Auth
+// - Ler profiles (controle técnico)
+// - Decidir a tela correta com base em:
+//   1) profiles.role   -> admin
+//   2) pessoas.tipo    -> aluno | professor
+//
+// IMPORTANTE:
+// ❌ Login NÃO cria nem vincula pessoa
+// ❌ Login NÃO altera profiles.role
+// ✅ Vínculo pessoa_id é responsabilidade do ADMIN
+// =======================================================
 
-// ==========================
-// ELEMENTOS
-// ==========================
+import { supabase } from "./supabaseClient.js";
+
+console.log("🚀 LOGIN.JS CARREGADO — VERSÃO FINAL");
+
+// =======================================================
+// ELEMENTOS DO DOM
+// =======================================================
 const form = document.getElementById("loginForm");
 const feedback = document.getElementById("feedback");
 
-// ==========================
-// SUBMIT LOGIN
-// ==========================
-if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+if (!form) {
+  console.error("❌ Formulário de login não encontrado");
+}
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+// =======================================================
+// SUBMIT DO LOGIN
+// =======================================================
+form?.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    if (!email || !password) {
-      feedback.textContent = "Preencha todos os campos";
+  const email = document.getElementById("email")?.value.trim();
+  const password = document.getElementById("password")?.value.trim();
+
+  if (!email || !password) {
+    feedback.textContent = "Preencha todos os campos";
+    return;
+  }
+
+  feedback.textContent = "Entrando...";
+
+  try {
+    // ===================================================
+    // 1️⃣ LOGIN VIA SUPABASE AUTH
+    // ===================================================
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      feedback.textContent = error.message;
       return;
     }
 
-    feedback.textContent = "Entrando...";
+    const user = data.user;
+    console.log("👤 USER LOGADO:", user);
 
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    // ===================================================
+    // 2️⃣ BUSCAR PROFILE (CONTROLE TÉCNICO)
+    // ⚠️ maybeSingle evita erro 500 com RLS
+    // ===================================================
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("role, pessoa_id")
+      .eq("id", user.id)
+      .maybeSingle();
 
-      const data = await response.json();
+    console.log("🧭 PROFILE:", profile, profileError);
 
-      if (!response.ok) {
-        feedback.textContent = data.error || "Erro ao autenticar";
-        return;
-      }
-
-      // ==========================
-      // NORMALIZA ROLE (BACKEND ENVIA EM MAIÚSCULO)
-      // ==========================
-      const role = data.role?.toLowerCase();
-
-      if (!role) {
-        feedback.textContent = "Perfil não encontrado";
-        return;
-      }
-
-      // ==========================
-      // SALVA SESSÃO
-      // ==========================
-      localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("role", role);
-
-      // ==========================
-      // REDIRECIONA POR ROLE
-      // ==========================
-      if (role === "admin") {
-        window.location.href = "pages/admin.html";
-        return;
-      }
-
-      if (role === "professor") {
-        window.location.href = "pages/professor.html";
-        return;
-      }
-
-      if (role === "aluno") {
-        window.location.href = "pages/aluno.html";
-        return;
-      }
-
-      // ==========================
-      // FALLBACK DE SEGURANÇA
-      // ==========================
-      feedback.textContent = "Perfil inválido";
-
-    } catch (error) {
-      console.error("Erro no login:", error);
-      feedback.textContent = "Erro ao conectar com a API";
+    if (profileError) {
+      console.error("Erro ao buscar profile:", profileError);
+      feedback.textContent = "Erro ao carregar perfil do usuário";
+      return;
     }
-  });
-}
+
+    if (!profile) {
+      feedback.textContent =
+        "Conta criada, mas perfil ainda não disponível. Contate a secretaria.";
+      return;
+    }
+
+    // ===================================================
+    // 3️⃣ PRIORIDADE: ADMIN
+    // ===================================================
+    if (profile.role === "admin") {
+      window.location.replace("/pages/admin.html");
+      return;
+    }
+
+    // ===================================================
+    // 4️⃣ CONTA SEM VÍNCULO COM PESSOA
+    // ===================================================
+    if (!profile.pessoa_id) {
+      feedback.textContent =
+        "Conta criada. Aguarde a secretaria liberar o acesso.";
+      return;
+    }
+
+    // ===================================================
+    // 5️⃣ REGRA DE NEGÓCIO (PESSOA)
+    // ===================================================
+    const { data: pessoa, error: pessoaError } = await supabase
+      .from("pessoas")
+      .select("tipo")
+      .eq("id", profile.pessoa_id)
+      .maybeSingle();
+
+    console.log("🎯 PESSOA:", pessoa, pessoaError);
+
+    if (pessoaError || !pessoa) {
+      feedback.textContent =
+        "Erro ao carregar dados do usuário. Contate o suporte.";
+      return;
+    }
+
+    const tipo = pessoa.tipo?.trim().toLowerCase();
+
+    if (tipo === "aluno") {
+      window.location.replace("/pages/aluno.html");
+      return;
+    }
+
+    if (tipo === "professor") {
+      window.location.replace("/pages/professor.html");
+      return;
+    }
+
+    feedback.textContent =
+      "Conta com configuração inválida. Contate o suporte.";
+  } catch (err) {
+    console.error("💥 ERRO NÃO TRATADO:", err);
+    feedback.textContent = "Erro inesperado ao realizar login";
+  }
+});
