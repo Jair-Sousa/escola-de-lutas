@@ -146,6 +146,91 @@
         </table>
       </section>
 
+      <!-- ========================================= -->
+      <!-- 🧍 MODAL — EDIÇÃO DE PESSOA               -->
+      <!-- ========================================= -->
+
+      <div id="editarPessoaModal" class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+          <!-- Cabeçalho -->
+          <header class="modal-header">
+            <h2>Editar Pessoa</h2>
+            <button
+              type="button"
+              id="fecharEditarPessoa"
+              class="btn-close"
+              aria-label="Fechar"
+            >
+              ×
+            </button>
+          </header>
+
+          <!-- Corpo -->
+          <section class="modal-body">
+            <form id="formEditarPessoa">
+
+              <div class="form-group">
+                <label for="editNome">Nome completo</label>
+                <input
+                  type="text"
+                  id="editNome"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="editEmail">Email</label>
+                <input
+                  type="email"
+                  id="editEmail"
+                  placeholder="Opcional"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="editTelefone">Telefone</label>
+                <input
+                  type="tel"
+                  id="editTelefone"
+                  placeholder="Opcional"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="editTipo">Tipo</label>
+                <select id="editTipo" required>
+                  <option value="">Selecione</option>
+                  <option value="aluno">Aluno</option>
+                  <option value="professor">Professor</option>
+                </select>
+              </div>
+
+              <footer class="modal-actions">
+                <button
+                  type="button"
+                  id="cancelarEditarPessoa"
+                  class="btn-secondary"
+                >
+                  Cancelar
+                </button>
+
+                <button
+                  type="submit"
+                  class="btn-primary"
+                >
+                  Salvar alterações
+                </button>
+              </footer>
+
+            </form>
+          </section>
+        </div>
+      </div>
+
       <button id="logoutBtn" class="logout">Sair</button>
     </main>
 
