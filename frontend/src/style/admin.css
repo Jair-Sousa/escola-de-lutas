@@ -1,3 +1,21 @@
+/* ======================================================
+   🎨 ADMIN.CSS — PAINEL ADMINISTRATIVO
+   Sistema Academia de Lutas
+   ======================================================
+
+   Objetivo:
+   - UI escura consistente
+   - Layout SPA simples
+   - Modal moderno para edição
+   - Tabela responsiva
+   - Código limpo e auditável
+
+   ====================================================== */
+
+/* ======================================================
+   🌍 RESET GLOBAL
+   ====================================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,17 +26,24 @@
 body {
   min-height: 100vh;
   background: #0e0e0e;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* ======================================================
+   📦 CONTAINER PRINCIPAL
+   ====================================================== */
+
 .membro-container {
   background: #161616;
   padding: 40px;
-  border-radius: 8px;
+  border-radius: 10px;
+
   width: 100%;
-  max-width: 900px; /* ERA 600px */
+  max-width: 900px;
+
   text-align: center;
   color: #fff;
 }
@@ -32,11 +57,9 @@ body {
   color: #ccc;
 }
 
-.divisor {
-  height: 1px;
-  background: #2a2a2a;
-  margin: 40px 0;
-}
+/* ======================================================
+   🧭 DASHBOARD (CARDS)
+   ====================================================== */
 
 .areas {
   display: flex;
@@ -47,8 +70,14 @@ body {
 .card {
   background: #1f1f1f;
   padding: 25px;
-  border-radius: 8px;
+  border-radius: 10px;
   flex: 1;
+
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .card h2 {
@@ -64,26 +93,38 @@ body {
 .card button {
   width: 100%;
   padding: 12px;
+
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+
   background: #c62828;
   color: #fff;
   font-weight: bold;
+
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .card button:hover {
   background: #a81f1f;
 }
 
+/* ======================================================
+   🚪 BOTÕES GERAIS
+   ====================================================== */
+
 .logout {
   background: #333;
   color: #ccc;
-  padding: 10px;
+
+  padding: 12px;
   width: 100%;
-  border-radius: 6px;
+
+  border-radius: 8px;
   border: none;
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
 .logout:hover {
@@ -93,9 +134,11 @@ body {
 .voltar-btn {
   background: none;
   border: none;
+
   color: #ccc;
   cursor: pointer;
   font-size: 14px;
+
   margin: 20px 0;
 }
 
@@ -104,23 +147,29 @@ body {
   text-decoration: underline;
 }
 
-/* ===== TELAS (BLOCOS) ===== */
+/* ======================================================
+   📌 SEÇÕES INTERNAS (PESSOAS / LISTA)
+   ====================================================== */
 
 #preCadastroSection,
-#listaPessoasSection {
+#listaPessoasSection,
+#presencasSection {
   background: #1b1b1b;
   padding: 25px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-top: 30px;
 }
 
-/* ===== FORMULÁRIO ===== */
-
 #preCadastroSection h2,
-#listaPessoasSection h2 {
+#listaPessoasSection h2,
+#presencasSection h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+/* ======================================================
+   📝 FORMULÁRIO — PRÉ-CADASTRO
+   ====================================================== */
 
 #formPessoa {
   display: grid;
@@ -128,42 +177,48 @@ body {
   gap: 15px;
 }
 
-/* Inputs básicos */
 #formPessoa input,
 #formPessoa select {
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   font-size: 14px;
+
+  outline: none;
 }
 
-/* Campo grande */
 #nome {
   grid-column: span 2;
 }
 
-/* Botão */
 #formPessoa button {
   grid-column: span 5;
   padding: 12px;
+
   background: #c62828;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
 #formPessoa button:hover {
   background: #a81f1f;
 }
 
-/* ===== MODALIDADES ===== */
+/* ======================================================
+   🥋 MODALIDADES
+   ====================================================== */
 
 #formPessoa fieldset {
   grid-column: span 5;
+
   border: 1px solid #333;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 15px;
 }
 
@@ -177,15 +232,23 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+
   margin-bottom: 10px;
 }
 
-/* ===== TABELA ===== */
+/* ======================================================
+   📋 TABELA — LISTAGEM DE PESSOAS
+   ====================================================== */
 
 .tabela-pessoas {
   width: 100%;
-  margin-top: 10px;
   border-collapse: collapse;
+
+  background: #1f1f1f;
+  border-radius: 10px;
+  overflow: hidden;
+
+  font-size: 14px;
 }
 
 .tabela-pessoas thead {
@@ -200,6 +263,7 @@ body {
 
 .tabela-pessoas th {
   color: #fff;
+  font-weight: bold;
 }
 
 .tabela-pessoas td {
@@ -207,64 +271,222 @@ body {
   border-top: 1px solid #333;
 }
 
-/* ===== STATUS ===== */
+/* ======================================================
+   ✅ STATUS VISUAL
+   ====================================================== */
 
+/* Sem conta */
 .status-sem-conta {
   color: #ff9800;
   font-weight: bold;
 }
 
+/* Com conta */
+.status-ok,
 .status-com-conta {
   color: #4caf50;
   font-weight: bold;
 }
 
-/* ===== PRESENÇAS (ADMIN) ===== */
+/* ======================================================
+   ✏️ BOTÃO EDITAR (AÇÕES)
+   ====================================================== */
 
-.filtros-presencas {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+.btn-edit {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
-.filtros-presencas input,
-.filtros-presencas select {
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-}
+  padding: 6px 12px;
+  border-radius: 8px;
 
-.filtros-presencas button {
-  padding: 8px 16px;
-  background: #444;
   color: #fff;
-  border: none;
-  border-radius: 6px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.filtros-presencas button:hover {
-  background: #555;
+.btn-edit:hover {
+  background: #c62828;
+  border-color: #c62828;
+}
+
+/* ======================================================
+   🧍 MODAL — EDIÇÃO DE PESSOA
+   ====================================================== */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal:not(.hidden) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
-/* ===== VOLTAR ===== */
 
-.voltar-btn {
+/* Fundo escuro com blur */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+/* Caixa principal */
+.modal-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 520px;
+
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: 2rem;
+  border-radius: 16px;
+
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+
+  animation: modalFade 0.2s ease;
+}
+
+/* Animação suave */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cabeçalho */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Botão fechar */
+.btn-close {
   background: none;
   border: none;
-  color: #ccc;
+
+  font-size: 1.5rem;
+  color: #bbb;
+
   cursor: pointer;
-  font-size: 14px;
-  margin: 20px 0;
+  transition: 0.2s;
 }
 
-.voltar-btn:hover {
+.btn-close:hover {
   color: #fff;
-  text-decoration: underline;
+  transform: scale(1.1);
 }
 
-/* ===== RESPONSIVO ===== */
+/* Corpo */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border-radius: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: #222;
+  color: #fff;
+
+  font-size: 1rem;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #c62828;
+}
+
+/* Botões do modal */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  background: #c62828;
+  border: none;
+
+  padding: 0.75rem 1.2rem;
+  border-radius: 10px;
+
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #333;
+  border: none;
+
+  padding: 0.75rem 1.2rem;
+  border-radius: 10px;
+
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #444;
+}
+
+/* ======================================================
+   📱 RESPONSIVO
+   ====================================================== */
 
 @media (max-width: 768px) {
   #formPessoa {
@@ -280,75 +502,12 @@ body {
   }
 }
 
-
-/* Responsivo */
 @media (max-width: 600px) {
   .areas {
     flex-direction: column;
   }
-}
 
-/* ===== TELA PESSOAS ===== */
-
-#listaPessoasSection {
-  margin-top: 40px;
-  text-align: left;
-}
-
-#listaPessoasSection h2 {
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-/* Tabela */
-.tabela-pessoas {
-  width: 100%;
-  border-collapse: collapse;
-  background: #1f1f1f;
-  border-radius: 8px;
-  overflow: hidden;
-  font-size: 14px;
-}
-
-.tabela-pessoas thead {
-  background: #2a2a2a;
-}
-
-.tabela-pessoas th,
-.tabela-pessoas td {
-  padding: 12px;
-  text-align: left;
-}
-
-.tabela-pessoas th {
-  color: #fff;
-  font-weight: bold;
-}
-
-.tabela-pessoas td {
-  color: #ccc;
-  border-top: 1px solid #333;
-}
-
-/* Status visual */
-.status-sem-conta {
-  color: #ff9800;
-  font-weight: bold;
-}
-
-.status-com-conta {
-  color: #4caf50;
-  font-weight: bold;
-}
-
-/* Modalidades */
-.modalidades {
-  font-size: 13px;
-  color: #bbb;
-}
-
-/* Responsivo */
-@media (max-width: 600px) {
+  /* Tabela mobile */
   .tabela-pessoas thead {
     display: none;
   }
@@ -363,9 +522,8 @@ body {
 
   .tabela-pessoas tr {
     margin-bottom: 15px;
-    background: #1f1f1f;
-    border-radius: 8px;
     padding: 10px;
+    border-radius: 10px;
   }
 
   .tabela-pessoas td {
