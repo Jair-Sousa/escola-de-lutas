@@ -4,7 +4,7 @@
 
 import { requireAdmin } from "./authGuard.js";
 import { supabase } from "./supabaseClient.js";
-import { loadPessoa } from "./admin-pessoas-edit.js";
+import { loadPessoa, initEdicaoPessoa } from "./admin-pessoas-edit.js";
 import { initModalEditarPessoa } from "./modal.js";
 
 /* ======================================================
@@ -14,7 +14,18 @@ import { initModalEditarPessoa } from "./modal.js";
 document.addEventListener("DOMContentLoaded", async () => {
   await requireAdmin();
 
+  // ✅ Modal inicializado
   const modalEditarPessoa = initModalEditarPessoa();
+
+  // ✅ Submit do modal conectado aqui
+  initEdicaoPessoa({
+    onSuccess: () => {
+      alert("Pessoa atualizada com sucesso!");
+      modalEditarPessoa.fechar();
+      carregarPessoas();
+    }
+  });
+
 
   /* ======================================================
      SEÇÕES
