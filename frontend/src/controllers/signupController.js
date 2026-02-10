@@ -1,4 +1,4 @@
-import { supabase } from "../js/supabaseClient.js";
+import { supabase } from "../services/supabaseClient.js";
 
 export function signupController() {
   console.log("🚀 signupController carregado");
