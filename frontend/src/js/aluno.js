@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .single();
 
   if (profileError || !profile?.pessoa_id) {
-    window.location.replace("/login.html");
+    window.location.replace("/login");
     return;
   }
 

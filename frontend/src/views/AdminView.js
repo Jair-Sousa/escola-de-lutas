@@ -2,7 +2,7 @@ import { adminController } from "../controllers/adminController.js";
 
 export default function AdminView() {
   // chama o controller depois que a view entrar na tela
-  setTimeout(() => loginController(), 0);
+  setTimeout(() => adminController(), 0);
 
   return `
   

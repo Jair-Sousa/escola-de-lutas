@@ -2,7 +2,7 @@ import { alunoController } from "../controllers/alunoController.js";
 
 export default function AlunoView() {
   // chama o controller depois que a view entrar na tela
-  setTimeout(() => professorController(), 0);
+  setTimeout(() => alunoController(), 0);
 
   return `
     <header class="header">
