@@ -1,30 +1,34 @@
 import { alunoController } from "../controllers/alunoController.js";
 
 export default function AlunoView() {
-  // chama o controller depois que a view entrar na tela
   setTimeout(() => alunoController(), 0);
 
   return `
-    <header class="header">
-    <h1>Área do Aluno</h1>
-    <button id="logoutBtn">Sair</button>
-  </header>
+    <main class="aluno-container">
 
-  <main class="container">
-    <h2>Minhas Presenças</h2>
+      <header class="aluno-header">
+        <h1>Área do Aluno</h1>
+        <button id="logoutBtn">Sair</button>
+      </header>
 
-    <table id="presencaTable">
-      <thead>
-        <tr>
-          <th>Data</th>
-          <th>Treino</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Presenças entram aqui -->
-      </tbody>
-    </table>
-  </main>
+      <section class="aluno-section">
+        <h2>Minhas Presenças</h2>
+
+        <div class="aluno-table-wrapper">
+          <table class="presenca-table" id="presencaTable">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Treino</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
   `;
 }
