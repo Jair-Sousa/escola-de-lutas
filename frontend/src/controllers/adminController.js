@@ -75,6 +75,9 @@ export function adminController() {
 
     pessoasTableBody.innerHTML = "";
 
+    // ======================================================
+    // ✅ ESTADO VAZIO
+    // ======================================================
     if (data.length === 0) {
       pessoasTableBody.innerHTML = `
         <tr>
@@ -86,8 +89,11 @@ export function adminController() {
       return;
     }
 
+    // ======================================================
+    // ✅ RENDER DA TABELA (com data-label para Mobile UX)
+    // ======================================================
     data.forEach((pessoa) => {
-      // ✅ Modalidades formatadas
+      // Modalidades formatadas
       const modalidadesTexto =
         pessoa.pessoas_modalidades.length > 0
           ? pessoa.pessoas_modalidades
@@ -95,14 +101,18 @@ export function adminController() {
               .join(", ")
           : "-";
 
+      // ✅ Apenas melhoria visual: data-label nos <td>
       pessoasTableBody.innerHTML += `
         <tr>
-          <td>${pessoa.nome_completo}</td>
-          <td>${pessoa.tipo}</td>
-          <td>${modalidadesTexto}</td>
-          <td>Ativo</td>
+          <td data-label="Nome">${pessoa.nome_completo}</td>
 
-          <td>
+          <td data-label="Tipo">${pessoa.tipo}</td>
+
+          <td data-label="Modalidades">${modalidadesTexto}</td>
+
+          <td data-label="Status">Ativo</td>
+
+          <td data-label="Ações">
             <button class="btn-editar" data-id="${pessoa.id}">
               Editar
             </button>
@@ -111,12 +121,13 @@ export function adminController() {
       `;
     });
 
-    // ativar botões editar
+    // ======================================================
+    // ✅ ATIVAR BOTÕES EDITAR
+    // ======================================================
     document.querySelectorAll(".btn-editar").forEach((btn) => {
       btn.onclick = () => abrirModalEditar(btn.dataset.id);
     });
   }
-
 
   // ======================================================
   // ✅ ABRIR MODAL EDITAR
@@ -184,7 +195,7 @@ export function adminController() {
     formPessoa.onsubmit = async (e) => {
       e.preventDefault();
 
-      // ===== Dados principais =====
+      // Dados principais
       const novaPessoa = {
         nome_completo: document.getElementById("nome").value,
         data_nascimento: document.getElementById("dataNascimento").value,
@@ -193,7 +204,7 @@ export function adminController() {
         tipo: document.getElementById("tipo").value,
       };
 
-      // ===== Inserir pessoa =====
+      // Inserir pessoa
       const { data, error } = await supabase
         .from("pessoas")
         .insert([novaPessoa])
@@ -209,7 +220,7 @@ export function adminController() {
       const pessoaId = data.id;
 
       // ======================================================
-      // ✅ SALVAR MODALIDADES (pessoas_modalidades)
+      // ✅ SALVAR MODALIDADES
       // ======================================================
       const modalidadesSelecionadas = [];
 
