@@ -1,12 +1,11 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Painel do Administrador</title>
-    <link rel="stylesheet" href="../src/style/admin.css" />
-  </head>
-  <body>
+import { adminController } from "../controllers/adminController.js";
+
+export default function AdminView() {
+  // chama o controller depois que a view entrar na tela
+  setTimeout(() => adminController(), 0);
+
+  return `
+  
     <main class="membro-container">
       <h1>Painel do Administrador</h1>
       <p>Gerencie o sistema</p>
@@ -233,7 +232,5 @@
 
       <button id="logoutBtn" class="logout">Sair</button>
     </main>
-
-    <script type="module" src="/src/js/admin.js"></script>
-  </body>
-</html>
+  `;
+}

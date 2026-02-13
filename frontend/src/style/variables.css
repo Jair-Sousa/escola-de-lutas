@@ -1,0 +1,37 @@
+:root {
+  /* 🎨 COLORS */
+  --color-bg: #000;
+  --color-surface: #111;
+
+  --color-white: #fff;
+  --color-text: #f5f5f5;
+  --color-text-muted: #ccc;
+
+  --color-primary: #c62828;
+  --color-primary-hover: #a81f1f;
+
+  /* ✍ Typography */
+  --font-main: "Poppins", sans-serif;
+
+  --fs-title: clamp(2.4rem, 5vw, 5rem);
+  --fs-subtitle: clamp(1.4rem, 3vw, 2.2rem);
+  --fs-base: 1.6rem;
+
+  /* 📐 Spacing */
+  --space-sm: 1.2rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+
+  /* 🧱 Layout */
+  --container-width: 1200px;
+  --container-padding: clamp(1.6rem, 4vw, 4rem);
+
+  /* Radius + Shadow */
+  --radius-md: 1.2rem;
+  --radius-lg: 2rem;
+
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.35);
+
+  /* Hero */
+  --hero-bg-size: 160%;  
+}

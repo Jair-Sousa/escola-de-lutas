@@ -1,13 +1,12 @@
- <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Painel do Professor</title>
-  <link rel="stylesheet" href="../src/style/professor.css" />
-</head>
-<body>
+import { professorController } from "../controllers/professorController.js";
 
-  <header>
+export default function ProfessorView() {
+  // chama o controller depois que a view entrar na tela
+  setTimeout(() => professorController(), 0);
+
+  return `
+  
+    <header>
     <h1>Painel do Professor</h1>
     <button id="btnSair">Sair</button>
   </header>
@@ -41,6 +40,5 @@
     </section>
 
   </main>
-<script type="module" src="/src/js/professor.js"></script>
-</body>
-</html>
+  `;
+}

@@ -2,22 +2,30 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/logo-luta-livre.png" />
+    <link rel="icon" href="/logo-luta-livre-yellow.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style/index.css" />
+
+    <!-- CSS global -->
+    <!-- <link rel="stylesheet" href="/src/style/index.css" />
+    <link rel="stylesheet" href="/src/style/professor.css">
+    <link rel="stylesheet" href="/src/style/aluno.css" />
+    <link rel="stylesheet" href="/src/style/login.css">
+    <link rel="stylesheet" href="/src/style/admin.css">
+    <link rel="stylesheet" href="/src/style/signup.css" /> -->
 
     <title>Academia de Lutas</title>
   </head>
-  <body>
-    <header class="hero">
-      <div class="hero-bg"></div>
 
-      <div class="hero-overlay">
-        <h1>Descubra o Lutador que Existe em Você!</h1>
-        <p>Treinamentos personalizados para todos os níveis</p>
-        <a href="/login.html" class="btn-primary">Entrar / Criar conta</a>
-      </div>
-    </header>
-    <script type="module" src="./src/js/index.js"></script>
+  <body>
+    <!-- SPA Root -->
+    <div id="app"></div>
+
+    <!-- JS principal -->
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

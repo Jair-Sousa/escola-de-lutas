@@ -10,14 +10,14 @@ if (logoutBtn) {
     await supabase.auth.signOut();
 
     // 🚨 REDIRECIONA MANUALMENTE
-    window.location.replace("/login.html");
+    window.location.replace("/login");
   });
 }
 export async function requireAuth() {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    window.location.replace("/login.html");
+    window.location.replace("/login");
     return null;
   }
 
@@ -35,45 +35,16 @@ export async function requireAdmin() {
     .single();
 
   if (!profile || profile.role !== "admin") {
-    window.location.replace("/login.html");
+    window.location.replace("/login");
     return false;
   }
 
   return true;
 }
 
-// export async function requireRole(allowedRoles) {
-//   const {
-//     data: { session },
-//   } = await supabase.auth.getSession();
-
-//   if (!session || !session.user) {
-//     window.location.replace("/login.html");
-//     return false;
-//   }
-
-//   const { data: profile, error } = await supabase
-//     .from("profiles")
-//     .select("role")
-//     .eq("id", session.user.id)
-//     .single();
-
-//   if (error || !profile) {
-//     window.location.replace("/login.html");
-//     return false;
-//   }
-
-//   if (!allowedRoles.includes(profile.role)) {
-//     window.location.replace("/login.html");
-//     return false;
-//   }
-
-//   return true;
-// }
-
 // 🔐 LOGOUT GLOBAL
 supabase.auth.onAuthStateChange((event) => {
   if (event === "SIGNED_OUT") {
-    window.location.replace("/login.html");
+    window.location.replace("/login");
   }
 });

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Área do Aluno</title>
-  <link rel="stylesheet" href="../src/style/aluno.css" />
-</head>
-<body>
+import { alunoController } from "../controllers/alunoController.js";
 
-  <header class="header">
+export default function AlunoView() {
+  // chama o controller depois que a view entrar na tela
+  setTimeout(() => alunoController(), 0);
+
+  return `
+    <header class="header">
     <h1>Área do Aluno</h1>
     <button id="logoutBtn">Sair</button>
   </header>
@@ -28,7 +26,5 @@
       </tbody>
     </table>
   </main>
-
-  <script type="module" src="/src/js/aluno.js"></script>
-</body>
-</html>
+  `;
+}
