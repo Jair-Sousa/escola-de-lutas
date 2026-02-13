@@ -1,77 +1,131 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* font-family: Arial, Helvetica, sans-serif; */
-}
+/* =========================================
+   SIGNUP — UI PREMIUM (Mobile First)
+========================================= */
 
-body {
+.signup-container {
+  width: 100%;
   min-height: 100vh;
-  background: #0f0f0f;
+
+  padding: var(--container-padding);
+
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #fff;
+
+  text-align: center;
+  color: var(--color-text);
+
+  background: var(--color-bg);
 }
 
-.card {
-  background: #1a1a1a;
-  padding: 30px;
+/* Logo */
+.logo {
+  width: 95px;
+  margin-bottom: 1.5rem;
+}
+
+/* Título */
+.signup-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Card principal */
+.signup-container form {
   width: 100%;
   max-width: 380px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-  text-align: center;
+
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-soft);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
 }
 
-.card h2 {
-  margin-bottom: 20px;
-}
+/* Inputs */
+.signup-container input {
+  padding: 1.2rem;
+  border-radius: 1.2rem;
 
-.card input[type="text"],
-.card input[type="email"],
-.card input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: rgba(30, 30, 30, 0.85);
+  color: white;
+
+  font-size: 1.5rem;
   outline: none;
-  font-size: 14px;
+
+  transition: border 0.2s ease;
 }
 
-.card button {
-  width: 100%;
-  padding: 12px;
-  background: #d32f2f;
-  color: #fff;
+.signup-container input:focus {
+  border-color: var(--color-primary);
+}
+
+/* Botão */
+.signup-container button {
+  padding: 1.3rem;
+  border-radius: var(--radius-lg);
+
   border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+
+  background: var(--color-primary);
+  color: white;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  transition: 0.25s ease;
 }
 
-.card button:hover {
-  background: #b71c1c;
+.signup-container button:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
 }
 
+/* Mensagem */
 #message {
-  margin-top: 12px;
-  font-size: 14px;
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  color: #fbc02d;
 }
 
-.card p {
-  margin-top: 15px;
-  font-size: 14px;
+/* Link login */
+.toggle {
+  margin-top: 1.8rem;
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
 }
 
-.card a {
-  color: #fdd835;
+.toggle a {
+  color: #fbc02d;
+  font-weight: 600;
   text-decoration: none;
 }
 
-.card a:hover {
+.toggle a:hover {
   text-decoration: underline;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .signup-container form {
+    max-width: 420px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .signup-container form {
+    max-width: 460px;
+  }
 }

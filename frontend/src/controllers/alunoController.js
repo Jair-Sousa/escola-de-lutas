@@ -17,15 +17,18 @@ export function alunoController() {
   ];
 
   // renderiza tabela
-  tbody.innerHTML = presencas
-    .map(
-      (p) => `
-        <tr>
-          <td>${p.data}</td>
-          <td>${p.treino}</td>
-          <td>${p.status}</td>
-        </tr>
-      `
-    )
-    .join("");
+tbody.innerHTML = presencas
+  .map(
+    (p) => `
+      <tr>
+        <td data-label="Data">${p.data}</td>
+        <td data-label="Treino">${p.treino}</td>
+        <td data-label="Status">
+          <span class="status presente">${p.status}</span>
+        </td>
+      </tr>
+    `
+  )
+  .join("");
+
 }
