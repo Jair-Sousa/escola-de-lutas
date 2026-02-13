@@ -1,0 +1,204 @@
+/* ============================================
+   HERO SECTION (HOME)
+   - Estrutura principal da tela inicial
+   - Contém background + overlay + conteúdo central
+============================================ */
+
+.hero {
+  /* Permite posicionar elementos internos com absolute */
+  position: relative;
+
+  /* Hero ocupa sempre a altura total da tela */
+  min-height: 100vh;
+}
+
+
+/* ============================================
+   BACKGROUND IMAGE
+   - Imagem decorativa no fundo
+   - Controlada por variável (--hero-bg-size)
+============================================ */
+
+.hero-bg {
+  /* Ocupa toda a área do hero */
+  position: absolute;
+  inset: 0;
+
+  /* Imagem de fundo */
+  background: url("/hero.png") no-repeat;
+
+  /* Zoom responsivo via variável */
+  background-size: var(--hero-bg-size);
+
+  /* Centraliza a imagem */
+  background-position: center center;
+
+  /* Transparência para não competir com o texto */
+  opacity: 0.65;
+
+  /* Ajuste visual para melhor contraste */
+  filter: contrast(1.1) brightness(0.8);
+
+  /* Fica atrás do conteúdo */
+  z-index: 1;
+}
+
+
+/* ============================================
+   HERO CONTENT BOX
+   - Card central com texto e botão
+   - Visual premium com sombra e transparência
+============================================ */
+
+.hero-content {
+  /* Limita largura do conteúdo */
+  max-width: 600px;
+  width: 100%;
+
+  /* Padding responsivo (cresce conforme a tela) */
+  padding: clamp(2rem, 5vw, 4rem);
+
+  /* Bordas arredondadas */
+  border-radius: var(--radius-lg);
+
+  /* Fundo transparente escuro */
+  background: rgba(15, 15, 15, 0.55);
+
+  /* Sombra suave */
+  box-shadow: var(--shadow-soft);
+
+  /* Centraliza texto */
+  text-align: center;
+}
+
+
+/* ============================================
+   OVERLAY
+   - Camada escura sobre o background
+   - Garante legibilidade do conteúdo
+============================================ */
+
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+
+  /* Mantém altura total */
+  min-height: 100vh;
+
+  /* Centraliza o conteúdo vertical e horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Padding global */
+  padding: var(--container-padding);
+
+  /* Fundo escurecido */
+  background: rgba(0, 0, 0, 0.45);
+
+  /* Texto alinhado ao centro */
+  text-align: center;
+}
+
+
+/* ============================================
+   HERO TEXT
+============================================ */
+
+.hero-overlay h1 {
+  /* Fonte fluida definida no design system */
+  font-size: var(--fs-title);
+
+  /* Espaçamento abaixo */
+  margin-bottom: var(--space-md);
+}
+
+.hero-overlay p {
+  /* Subtítulo fluido */
+  font-size: var(--fs-subtitle);
+
+  /* Cor mais suave */
+  color: var(--color-text-muted);
+
+  /* Espaçamento antes do botão */
+  margin-bottom: var(--space-lg);
+}
+
+
+/* ============================================
+   PRIMARY BUTTON (CTA)
+============================================ */
+
+.btn-primary {
+  /* Botão alinhado corretamente */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Cor principal do sistema */
+  background: var(--color-primary);
+  color: var(--color-white);
+
+  /* Padding confortável */
+  padding: 1.4rem 3.6rem;
+
+  /* Bordas arredondadas */
+  border-radius: var(--radius-lg);
+
+  /* Tipografia */
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  /* Remove sublinhado padrão */
+  text-decoration: none;
+
+  /* Cursor de botão */
+  cursor: pointer;
+
+  /* Transição suave */
+  transition: all 0.25s ease;
+}
+
+/* Hover moderno */
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+
+  /* Elevação */
+  transform: translateY(-3px);
+
+  /* Glow leve */
+  box-shadow: 0 10px 25px rgba(198, 40, 40, 0.35);
+}
+
+
+/* ============================================
+   RESPONSIVE BACKGROUND CONTROL
+   - Ajusta o zoom da imagem em cada breakpoint
+============================================ */
+
+/* Tablet: zoom moderado */
+@media (min-width: 768px) {
+  :root {
+    --hero-bg-size: 130%;
+  }
+}
+
+/* Desktop: comportamento natural com cover */
+@media (min-width: 1024px) {
+  :root {
+    --hero-bg-size: cover;
+  }
+
+  /* Ajuste fino de posição */
+  .hero-bg {
+    background-position: center;
+  }
+}
+
+/* Large screens: zoom leve para manter impacto */
+@media (min-width: 1440px) {
+  :root {
+    --hero-bg-size: 110%;
+  }
+}
